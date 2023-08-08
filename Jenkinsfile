@@ -1,7 +1,7 @@
 pipeline{
     agent{label 'UBUNTU_JDK82'}
     triggers { pollSCM('* * * *') }
-    parameters { choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'], description: 'MAVEN_GOAL') }.
+    parameters { choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'], description: 'MAVEN GOAL') }
     stages{
         stage('VCS'){
             steps{
