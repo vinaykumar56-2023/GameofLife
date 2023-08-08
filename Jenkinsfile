@@ -14,7 +14,7 @@ pipeline{
                 jdk 'jdk_8_ubuntu'
             }
             steps{
-               sh 'mvn ${params.MAVEN_GOAL}'
+               sh "mvn ${params.MAVEN_GOAL}"
             }            
         }
         stage('post build'){
