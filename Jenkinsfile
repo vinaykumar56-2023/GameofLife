@@ -1,6 +1,6 @@
 pipeline{
     agent{label 'UBUNTU_JDK82'}
-    triggers { pollSCM('* * * *') }
+    triggers { pollSCM('*/10 * * *') }
     parameters { choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'], description: 'MAVEN GOAL') }
     stages{
         stage('VCS'){
@@ -10,8 +10,8 @@ pipeline{
             }
         }
         stage('package'){
-            tools{
-                jdk 'jdk_8_ubuntu'
+            steps{
+                sh 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH'
             }
             steps{
                sh "mvn ${params.MAVEN_GOAL}"
