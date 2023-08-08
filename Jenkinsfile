@@ -11,9 +11,7 @@ pipeline{
         }
         stage('package'){
             steps{
-                sh 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH'
-            }
-            steps{
+               sh 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH'
                sh "mvn ${params.MAVEN_GOAL}"
             }            
         }
