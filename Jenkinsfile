@@ -1,18 +1,21 @@
-node('UBUNTU_JDK82')
-{
-    stage('version control')
-    {
-        git url:'https://github.com/vinaykumar56-2023/GameofLife.git'
-        branch: 'scripted'
+pipeline{
+    agent{label 'UBUNTU_JDK82'}
+    stages{
+        stage('VCS'){
+            steps{
+                git 'https://github.com/vinaykumar56-2023/GameofLife.git',
+                branch: 'declarative'
+            }
+        }
+        stage('package'){
+            steps{
+               sh 'mvn package'
+            }            
+        }
+        stage('post build'){
+            steps{
+               archiveArtifacts artifacts: '**/target/gameoflife.war', followSymlinks: false
+            }            
+        }
     }
-    stage('build the code ')
-    {
-        sh 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn package'
-    }
-    stage('archive the artifacts')
-    {
-        archiveArtifacts artifacts: '**/target/gameoflife.war', followSymlinks: false
-        
-    }
-    
 }
